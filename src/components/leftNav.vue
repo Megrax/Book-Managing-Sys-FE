@@ -13,25 +13,33 @@
             <li>
                 <dl>
                     <dt>书籍归还</dt>
-                    <dd><a href="#">归还书籍</a></dd>
+                    <dd>
+                        <router-link to="/return-book" active-class="active">归还书籍</router-link>
+                    </dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>用户信息查询</dt>
-                    <dd><a href="#">我的信息</a></dd>
+                    <dd>
+                        <router-link to="/my-info" active-class="active">我的信息</router-link>
+                    </dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>用户信息管理</dt>
-                    <dd><a href="#">信息管理</a></dd>
+                    <dd>
+                        <router-link to="/manage-info" active-class="active">信息管理</router-link>
+                    </dd>
                 </dl>
             </li>
             <li>
                 <dl>
                     <dt>排行榜</dt>
-                    <dd><a href="#">查看排行榜</a></dd>
+                    <dd>
+                        <router-link to="/ranking" active-class="active">查看排行榜</router-link>
+                    </dd>
                 </dl>
             </li>
         </ul>

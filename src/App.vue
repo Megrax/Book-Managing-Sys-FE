@@ -11,6 +11,10 @@
   import headNav from './components/headNav';
   import leftNav from './components/leftNav';
   import borrowBook from './components/borrowBook';
+  import returnBook from './components/returnBook';
+  import myInfo from './components/myInfo';
+  import manageInfo from './components/manageInfo';
+  import ranking from './components/ranking';
 
   export default Vue.extend({
     data: function() {
@@ -21,7 +25,11 @@
     components: {
       headNav,
       leftNav,
-      borrowBook
+      borrowBook,
+      returnBook,
+      myInfo,
+      manageInfo,
+      ranking
     }
   });
 </script>
