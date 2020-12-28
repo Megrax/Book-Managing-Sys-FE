@@ -1,0 +1,38 @@
+#query_book .form_wrapper {
+	padding: 0 300px;
+	margin-top: 30px;
+	margin: 0 auto;
+	width: 700px;
+}
+
+#query_book .result_wrapper {
+	/* background-color: aqua; */
+	width: 100%;
+	padding-top: 40px;
+}
+
+#query_book .book {
+	width: 700px;
+	height: 200px;
+	/* background-color: orange; */
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin: 0 auto;
+	margin-bottom: 20px;
+	padding-top: 20px;
+}
+
+#query_book .book > div {
+	margin: 12px 30px;
+}
+
+#query_book .book button {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+#return_book .content_wrapper {
+	height: 700px;
+	width: 1000px;
+	margin: 0 auto;
+	background-color: purple;
+}
