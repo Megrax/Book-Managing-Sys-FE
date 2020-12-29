@@ -1,6 +1,5 @@
 <template>
     <aside class="lt_aside_nav content mCustomScrollbar">
-        <!-- <h2><a href="index.php">起始页</a></h2> -->
         <ul>
             <li>
                 <dl>

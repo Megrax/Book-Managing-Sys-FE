@@ -1,6 +1,24 @@
 <template>
-    <div class="rt_content" id="return_book">
-        ranking
+    <div class="rt_content view" id="ranking">
+        <div class="content_wrapper">
+            <table class="table">
+                <tr>
+                    <th>排名</th>
+                    <th>姓名</th>
+                    <th>阅读等级</th>
+                    <th>信誉等级</th>
+                </tr>
+                <tr v-for="(person, index) in ranking_list" :key="index">
+                    <td>
+                        {{ index + 1 }}
+                    </td>
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.readingLV }}</td>
+                    <td>{{ person.trustLV }}</td>
+                </tr>
+
+            </table>
+        </div>
     </div>
 </template>
 
@@ -9,6 +27,61 @@
 
 <script>
 export default {
-
+    data: function () {
+        return {
+            ranking_list: [
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+                {
+                    name: 'DeathGhost',
+                    readingLV: 31,
+                    trustLV: 5
+                },
+            ]
+        }
+    }
 }
 </script>

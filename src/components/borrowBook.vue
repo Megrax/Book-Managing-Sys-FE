@@ -20,16 +20,15 @@
             </form>
         </div>
         <div class="result_wrapper">
-            <div class="book">
-                <div>书名：<span class="book_name">西游记</span></div>
-                <div>作者：<span class="author_name">吴承恩</span></div>
+            <div class="book" v-for="book in books" :key="book.name">
+                <div>书名：<span class="book_name">{{ book.name }}</span></div>
+                <div>作者：<span class="author_name">{{ book.author }}</span></div>
                 <div>
-                    出版社：<span class="author_name">岳麓书院出版社</span>
+                    出版社：<span class="author_name">{{ book.press }}</span>
                 </div>
-                <div>剩余可借本数：<span>1</span></div>
-                <button class="btn_borrow">借阅</button>
-                <button class="btn_continue">续借</button>
-                <button class="btn_reserve">预定</button>
+                <div>剩余可借本数：<span>{{ book.number }}</span></div>
+                <button class="link_btn">借阅</button>
+                <button class="link_btn">预定</button>
             </div>
         </div>
     </div>
@@ -40,6 +39,29 @@
 
 <script>
 export default {
-
+    data: function () {
+        return {
+            books: [
+                {
+                    name: '西游记',
+                    author: '吴承恩',
+                    press: '岳麓书院出版社',
+                    number: 3
+                },
+                {
+                    name: '西游记',
+                    author: '吴承恩',
+                    press: '岳麓书院出版社',
+                    number: 3
+                },
+                {
+                    name: '西游记',
+                    author: '吴承恩',
+                    press: '岳麓书院出版社',
+                    number: 3
+                },
+            ]
+        }
+    }
 }
 </script>
