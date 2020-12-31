@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <headNav></headNav>
-        <leftNav></leftNav>
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script lang="js">
   import Vue from 'vue';
+  import library from './components/library';
+  import login from './components/login';
   import headNav from './components/headNav';
   import leftNav from './components/leftNav';
   import borrowBook from './components/borrowBook';
@@ -23,6 +21,8 @@
       }
     },
     components: {
+      login,
+      library,
       headNav,
       leftNav,
       borrowBook,

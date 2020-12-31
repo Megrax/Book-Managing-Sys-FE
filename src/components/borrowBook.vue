@@ -12,7 +12,7 @@
                     <option>按作者名查询</option>
                 </select>
                 <select class="select">
-                    <option disabled>请选择查询精读</option>
+                    <option disabled>请选择查询精度</option>
                     <option>完全匹配</option>
                     <option>自由匹配</option>
                 </select>
