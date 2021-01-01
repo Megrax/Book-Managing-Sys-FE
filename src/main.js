@@ -8,8 +8,12 @@ import library from './components/library';
 import borrowBook from './components/borrowBook';
 import returnBook from './components/returnBook';
 import myInfo from './components/myInfo';
+import borrwoRecord from './components/borrowRecord';
 import manageInfo from './components/manageInfo';
 import ranking from './components/ranking';
+import admin from './components/admin';
+import operateBook from './components/operateBook';
+import addBook from './components/addBook';
 
 const routes = [
     { path: '/login', component: login },
@@ -20,7 +24,17 @@ const routes = [
             { path: 'borrow-book', component: borrowBook },
             { path: 'return-book', component: returnBook },
             { path: 'my-info', component: myInfo },
+            { path: 'borrow-record', component: borrwoRecord },
             { path: 'manage-info', component: manageInfo },
+            { path: 'ranking', component: ranking },
+        ]
+    },
+    {
+        path: '/admin',
+        component: admin,
+        children: [
+            { path: 'operate-book', component: operateBook },
+            { path: 'add-book', component: addBook },
             { path: 'ranking', component: ranking },
         ]
     },

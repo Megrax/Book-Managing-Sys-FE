@@ -10,7 +10,7 @@
                     <input type="text" placeholder="账号" class="login_txtbx" v-model="uname" required />
                 </dd>
                 <dd class="pwd_icon">
-                    <input type="password" placeholder="密码" class="login_txtbx" v-model="currPwd" required />
+                    <input type="password" placeholder="密码" class="login_txtbx" v-model="currPwd" @keyup.enter="loginCheck" required />
                 </dd>
                 <dd>
                     <input type="button" value="立即登陆" class="submit_btn" v-on:click="loginCheck" />
@@ -26,16 +26,31 @@ export default {
         return {
             uname: '',
             currPwd: '',
-            actualPwd: '654321$'
+            actualPwd: '654321$',
+            isAdmin: false
         }
     },
     methods: {
         loginCheck: function () {
             if (this.currPwd === this.actualPwd) {
                 this.$cookies.set('login', 'nineebevahuoy823328cfktae8004' + this.uname);
-                this.$router.push({ path: '/library' });
+                if (this.isAdmin) {
+                    this.$cookies.set('admin', 'y2lno20nimdasis11iht' + this.uname);
+                    this.$router.push({ path: '/admin' }).catch(() => { });
+                } else {
+                    this.$router.push({ path: '/library' }).catch(() => { });
+                }
             } else {
                 alert('账号密码有误！');
+            }
+        }
+    },
+    created: function () {
+        if (this.$cookies.isKey('login')) {
+            if (this.$cookies.isKey('admin')) {
+                this.$router.push({ path: '/admin' }).catch(() => { });
+            } else {
+                this.$router.push({ path: '/library' }).catch(() => { });
             }
         }
     }

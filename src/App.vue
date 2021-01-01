@@ -11,6 +11,7 @@
   import borrowBook from './components/borrowBook';
   import returnBook from './components/returnBook';
   import myInfo from './components/myInfo';
+  import borrowRecord from './components/borrowRecord';
   import manageInfo from './components/manageInfo';
   import ranking from './components/ranking';
 
@@ -28,6 +29,7 @@
       borrowBook,
       returnBook,
       myInfo,
+      borrowRecord,
       manageInfo,
       ranking
     }

@@ -23,6 +23,9 @@
                     <dd>
                         <router-link to="/library/my-info" active-class="active">我的信息</router-link>
                     </dd>
+                    <dd>
+                        <router-link to="/library/borrow-record" active-class="active">借阅记录</router-link>
+                    </dd>
                 </dl>
             </li>
             <li>

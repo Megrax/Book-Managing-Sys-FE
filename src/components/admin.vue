@@ -1,7 +1,7 @@
 <template>
     <div>
         <headNav></headNav>
-        <leftNav></leftNav>
+        <adminNav></adminNav>
         <router-view></router-view>
     </div>
 </template>
@@ -11,16 +11,16 @@
 
 <script>
 import headNav from './headNav';
-import leftNav from './leftNav';
+import adminNav from './adminNav';
 
 export default {
     components: {
         headNav,
-        leftNav
+        adminNav
     },
     created: function () {
-        if (!this.$cookies.isKey('login') || this.$cookies.isKey('admin')) {
-            this.$router.push({ path: '/login' }).catch(() => { });
+        if (!this.$cookies.isKey('login') || !this.$cookies.isKey('admin')) {
+            this.$router.push({ path: '/login' });
         }
     }
 }

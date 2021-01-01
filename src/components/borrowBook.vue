@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="result_wrapper">
-            <div class="book" v-for="book in books" :key="book.name">
+            <div class="book" v-for="(book,index) in books" :key="index">
                 <div>书名：<span class="book_name">{{ book.name }}</span></div>
                 <div>作者：<span class="author_name">{{ book.author }}</span></div>
                 <div>
