@@ -16,11 +16,14 @@
                                 《{{ book.name }}》
                             </div>
                         </td>
-                        <td>{{ book.return }}</td>
+                        <td v-if="!book.isScheduled">{{ book.return }}</td>
+                        <td v-else>还在预定中</td>
                         <td>
-                            <span class="toBeReturned" v-if="!book.isReturned && book.return >= currTime">未归还</span>
-                            <span class="returned" v-if="book.isReturned">已归还</span>
-                            <span class="timeOut" v-if="!book.isReturned && book.return < currTime">超时</span>
+                            <span class="Scheduled" v-if="book.isScheduled">预定中</span>
+                            <span class="toBeReturned" v-else-if="!book.isReturned && book.return >= currTime">未归还</span>
+                            <span class="returned" v-else-if="book.isReturned">已归还</span>
+                            <span class="timeOut" v-else-if="!book.isReturned && book.return < currTime">超时</span>
+
                         </td>
                     </tr>
                 </table>
@@ -44,6 +47,9 @@
 .timeOut {
     color: rgba(255, 0, 0, 0.769);
 }
+.Scheduled {
+    color: #7dc4e7;
+}
 </style>
 
 <script>
@@ -54,131 +60,6 @@ export default {
             borrowed_book: {
                 flag: true,
                 books: [
-                    {
-                        name: '西游记',
-                        return: '2020.10.1',
-                        isReturned: false
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: false
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
-                    {
-                        name: '西游记',
-                        return: '2021.10.1',
-                        isReturned: true
-                    },
                 ]
             }
         }
@@ -186,6 +67,19 @@ export default {
     created: function () {
         let myDate = new Date();
         this.currTime = myDate.getFullYear() + '.' + (myDate.getMonth() + 1) + '.' + myDate.getDate();
+        console.log(this.currTime>="2020.12.3")
+        console.log(this.currTime)
+        this.axios({
+            url:this.globalUrl+"/selectAllRecords",
+            method:'get',
+            params:{
+                username:localStorage.getItem("login")
+            }
+        }).then(res=>{
+            console.log(res.data)
+            this.borrowed_book.books = res.data.other
+        })
+
     }
 }
 </script>

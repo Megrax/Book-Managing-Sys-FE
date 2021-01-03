@@ -22,16 +22,8 @@ export default {
     },
     methods: {
         logout: function () {
-            let loginCookie = this.$cookies.get('login');
-            let adminCookie = this.$cookies.get('admin');
-            if (adminCookie)
-                this.$cookies.remove('admin');
-            if (loginCookie) {
-                this.$cookies.remove('login');
-                this.$router.push({ path: '/login' });
-            } else {
-                this.$router.push({ path: '/login' });
-            }
+            let s = localStorage.clear();
+            this.$router.push("/login")
         }
     }
 }

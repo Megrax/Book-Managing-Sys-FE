@@ -14,6 +14,10 @@ import ranking from './components/ranking';
 import admin from './components/admin';
 import operateBook from './components/operateBook';
 import addBook from './components/addBook';
+import axios from 'axios'
+Vue.prototype.axios = axios
+
+Vue.prototype.globalUrl = "http://127.0.0.1:8081/"
 
 const routes = [
     { path: '/login', component: login },

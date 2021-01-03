@@ -88,7 +88,7 @@
                         </td>
                         <td>{{ book.return }}</td>
                         <td><a href="#" class="inner_btn">续借</a>
-                            <a href="#" class="inner_btn">归还</a>
+                            <a href="#" class="inner_btn" @click="returnbook(book.name)">归还</a>
                         </td>
                     </tr>
 
@@ -100,6 +100,23 @@
 
 <script>
 export default {
+    created() {
+        this.axios({
+            url:this.globalUrl+"/selectAllRecords",
+            method:'get',
+            params:{
+                username:localStorage.getItem("login")
+            }
+        }).then(res=>{
+            console.log(res.data)
+            for(let i = 0;i<res.data.other.length;i++){
+                if (!res.data.other[i].isReturned&&!res.data.other[i].isScheduled){
+                    this.borrowed_book.books.push(res.data.other[i])
+                }
+            }
+            console.log(this.borrowed_book.books)
+        })
+    },
     data: function () {
         return {
             currEmail: '',
@@ -109,16 +126,27 @@ export default {
             isChangePwdProtWindow: false,
             borrowed_book: {
                 flag: true,
-                books: [
-                    {
-                        name: '西游记',
-                        return: '2021.10.1'
-                    }
-                ]
+                books: []
             }
         }
     },
     methods: {
+        returnbook(bookname){
+          this.axios({
+              url:this.globalUrl+"/returnBook",
+              params:{
+                  username:localStorage.getItem("login"),
+                  bookName:bookname,
+              }
+          }).then(res=>{
+              console.log(res.data)
+              if (res.data.status===200){
+                  alert("归还成功")
+              }else{
+                  alert("归还失败")
+              }
+          })
+        },
         checkEmail: function () {
             if (this.currEmail) {
                 if (this.currEmail === this.actualEmail) {

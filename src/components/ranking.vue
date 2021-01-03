@@ -12,11 +12,10 @@
                     <td>
                         {{ index + 1 }}
                     </td>
-                    <td>{{ person.name }}</td>
-                    <td>{{ person.readingLV }}</td>
-                    <td>{{ person.trustLV }}</td>
+                    <td>{{ person.username }}</td>
+                    <td>{{ person.permission }}</td>
+                    <td>{{ person.userCredibility }}</td>
                 </tr>
-
             </table>
         </div>
     </div>
@@ -27,60 +26,16 @@
 
 <script>
 export default {
+    created() {
+        this.axios({
+            url:this.globalUrl+"/rank"
+        }).then(res=>{
+            this.ranking_list = res.data.other
+        })
+    },
     data: function () {
         return {
-            ranking_list: [
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-                {
-                    name: 'DeathGhost',
-                    readingLV: 31,
-                    trustLV: 5
-                },
-            ]
+            ranking_list: []
         }
     }
 }

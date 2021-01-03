@@ -40,6 +40,20 @@
 
 <script>
 export default {
+    created() {
+        this.axios({
+            url:this.globalUrl+"/user",
+            params:{
+                username:localStorage.getItem("login")
+            }
+        }).then(res=>{
+            console.log(res.data)
+            this.myInfo.ID = res.data.other.userID
+            this.myInfo.name = res.data.other.username
+            this.myInfo.readingLV = res.data.other.permission
+            this.myInfo.trustLV =res.data.other.userCredibility
+        })
+    },
     data: function () {
         return {
             myInfo: {

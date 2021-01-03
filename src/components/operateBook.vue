@@ -21,19 +21,19 @@
         </div>
         <div class="result_wrapper">
             <div class="book" v-for="(book,index) in books" :key="index">
-                <div>书名：<span class="book_name">{{ book.name }}</span></div>
+                <div>书名：<span class="book_name">{{ book.bookName }}</span></div>
                 <div>作者：<span class="author_name">{{ book.author }}</span></div>
                 <div>
-                    出版社：<span class="author_name">{{ book.press }}</span>
+                    出版社：<span class="author_name">{{ book.publish }}</span>
                 </div>
-                <div>剩余可借本数：<span>{{ book.number }}</span></div>
-                <button class="link_btn" @click="showUploadBookWindow">上架</button>
-                <button class="link_btn" @click="showDownloadBookWindow">下架</button>
+                <div>剩余可借本数：<span>{{ book.bookNum }}</span></div>
+                <button class="link_btn" @click="showUploadBookWindow(book.bookName)">上架</button>
+                <button class="link_btn" @click="showDownloadBookWindow(book.bookName)">下架</button>
             </div>
         </div>
         <section class="pop_bg" v-show="isUploadBookWindow">
             <div class="pop_cont">
-                <h3>修改密码</h3>
+                <h3>上架</h3>
                 <div class="pop_cont_input">
                     <ul>
                         <li>
@@ -43,24 +43,24 @@
                     </ul>
                 </div>
                 <div class="btm_btn">
-                    <input type="button" value="确认" class="input_btn trueBtn" @click="uploadBook(),shutUploadBookWindow()" />
+                    <input type="button" value="确认" class="input_btn trueBtn" @click="uploadBook()" />
                     <input type="button" value="取消" class="input_btn falseBtn" @click="shutUploadBookWindow" />
                 </div>
             </div>
         </section>
         <section class="pop_bg" v-show="isDownloadBookWindow">
             <div class="pop_cont">
-                <h3>修改密码</h3>
+                <h3>下架</h3>
                 <div class="pop_cont_input">
                     <ul>
                         <li>
                             <span>请输入下架的本数：</span>
-                            <input type="text" placeholder="请输入数量..." class="textbox" v-model="upNum" />
+                            <input type="text" placeholder="请输入数量..." class="textbox" v-model="downNum" />
                         </li>
                     </ul>
                 </div>
                 <div class="btm_btn">
-                    <input type="button" value="确认" class="input_btn trueBtn" @click="downloadBook(),shutDownloadBookWindow()" />
+                    <input type="button" value="确认" class="input_btn trueBtn" @click="downloadBook()" />
                     <input type="button" value="取消" class="input_btn falseBtn" @click="shutDownloadBookWindow" />
                 </div>
             </div>
@@ -73,52 +73,75 @@
 
 <script>
 export default {
+    created() {
+        this.axios({
+            url:this.globalUrl+"/allBooks"
+        }).then(res=>{
+            this.books = res.data.other
+            console.log(this.books)
+        })
+    },
     data: function () {
         return {
             isUploadBookWindow: false,
             isDownloadBookWindow: false,
             upNum: 0,
             downNum: 0,
-            books: [
-                {
-                    name: '西游记',
-                    author: '吴承恩',
-                    press: '岳麓书院出版社',
-                    number: 3
-                },
-                {
-                    name: '西游记',
-                    author: '吴承恩',
-                    press: '岳麓书院出版社',
-                    number: 3
-                },
-                {
-                    name: '西游记',
-                    author: '吴承恩',
-                    press: '岳麓书院出版社',
-                    number: 3
-                },
-            ]
+            books: [],
+            hiddenBookName:""
         }
     },
     methods: {
-        showUploadBookWindow: function () {
+        showUploadBookWindow(bookname) {
             this.isUploadBookWindow = true;
+            this.hiddenBookName=bookname
+
         },
         shutUploadBookWindow: function () {
             this.isUploadBookWindow = false;
         },
-        showDownloadBookWindow: function () {
+        showDownloadBookWindow(bookname) {
             this.isDownloadBookWindow = true;
+            this.hiddenBookName=bookname
         },
         shutDownloadBookWindow: function () {
             this.isDownloadBookWindow = false;
         },
         uploadBook: function () {
-            alert('uploading book..');
+            console.log(this.upNum)
+            this.axios({
+                url:this.globalUrl+"/listedBook",
+                params:{
+                    bookName:this.hiddenBookName,
+                    num:this.upNum
+                }
+            }).then(res=>{
+                console.log(res.data)
+                if (res.data.status===200){
+                    alert("上架"+res.data.other+"本")
+                    this.isUploadBookWindow = false;
+                }else{
+                    alert("操作失败")
+                }
+            })
         },
         downloadBook: function () {
-            alert('downloading book...');
+            console.log(this.downNum)
+            this.axios({
+                url:this.globalUrl+"/unlistedBook",
+                params:{
+                    bookName:this.hiddenBookName,
+                    num:this.downNum
+                }
+            }).then(res=>{
+                console.log(res.data)
+                if (res.data.status===200){
+                    alert("下架"+res.data.other+"本")
+                    this.isDownloadBookWindow = false;
+                }else{
+                    alert("操作失败")
+                }
+            })
         },
     }
 }

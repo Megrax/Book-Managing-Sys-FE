@@ -19,7 +19,7 @@ export default {
         leftNav
     },
     created: function () {
-        if (!this.$cookies.isKey('login') || this.$cookies.isKey('admin')) {
+        if (!localStorage.getItem('login') || localStorage.getItem('admin')) {
             this.$router.push({ path: '/login' }).catch(() => { });
         }
     }

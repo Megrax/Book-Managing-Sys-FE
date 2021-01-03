@@ -31,29 +31,39 @@ export default {
         }
     },
     methods: {
-        loginCheck: function () {
-            if (this.currPwd === this.actualPwd) {
-                this.$cookies.set('login', 'nineebevahuoy823328cfktae8004' + this.uname);
-                if (this.isAdmin) {
-                    this.$cookies.set('admin', 'y2lno20nimdasis11iht' + this.uname);
-                    this.$router.push({ path: '/admin' }).catch(() => { });
-                } else {
-                    this.$router.push({ path: '/library' }).catch(() => { });
+        loginCheck(){
+            let lurl = this.globalUrl+"/login"
+            this.axios({
+                url:lurl,
+                method:'get',
+                params:{
+                    userName:this.uname,
+                    password:this.currPwd
                 }
-            } else {
-                alert('账号密码有误！');
-            }
+            }).then(res=>{
+                console.log(res.data)
+                if (res.data.status===200){
+                    this.currPwd = res.data.password
+                    localStorage.setItem('login', this.uname);
+                    this.$router.push({ path: '/library' }).catch(() => { });
+                }else if (res.data.status===201){
+                    localStorage.setItem('admin', 'y2lno20nimdasis11iht' + this.uname);
+                    this.$router.push({ path: '/admin' }).catch(() => { });
+                }else{
+                    alert("账号密码有误")
+                }
+            })
         }
     },
-    created: function () {
-        if (this.$cookies.isKey('login')) {
-            if (this.$cookies.isKey('admin')) {
-                this.$router.push({ path: '/admin' }).catch(() => { });
-            } else {
-                this.$router.push({ path: '/library' }).catch(() => { });
-            }
-        }
-    }
+    // created: function () {
+    //     if (this.$cookies.isKey('login')) {
+    //         if (this.$cookies.isKey('admin')) {
+    //             this.$router.push({ path: '/admin' }).catch(() => { });
+    //         } else {
+    //             this.$router.push({ path: '/library' }).catch(() => { });
+    //         }
+    //     }
+    // }
 }
 </script>
 
